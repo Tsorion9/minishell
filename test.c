@@ -3,21 +3,30 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <stdlib.h>
 
 void	func(int a)
 {
 	printf("signal | PID %d\n", getpid());
 	printf("signal number %d\n", a);
+	exit(1);
 }
 
-int	main()
+int	main(void)
 {
-	signal(SIGINT, func);
+	extern char **environ;
+	int i = 0;
+	while (environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
+	signal(SIGINT, SIG_IGN);
 	char	buf[100];
 	int b;
 	int a = 0;
 	int status;
-	char *av[]= {"/Users/kristinaafonina/Desktop/ft_ls/ft_ls", "-la", 0};
+	char *av[]= {"ls", "-lR", "/", 0};
 	pid_t p;
 	p = fork();
 	printf("fork returned %d\n", p);
@@ -27,12 +36,13 @@ int	main()
                         getpid(),  getppid());
 		while (++a < 110)
 			printf("%d\n", a);
-		//sleep(5);
-		//execv(av[0], av);
+		execve("/bin/ls", av, environ);
 	}
 	else
 	{
-		kill(0, SIGINT);
+		signal(SIGINT, SIG_IGN);
+		wait(&status);
+		//kill(0, SIGINT);
                 printf("In parent,  pid=%d,  fork returned=%d\n",
                         getpid(),  p);
 		while (++a < 100)
@@ -40,8 +50,8 @@ int	main()
 			printf("%d\n", a);
 			buf[a] = 0;
 		}
-		//sleep(5);
-        }
+		sleep(5);
+   	}
 	printf("status = %d\n", status);
 	write (1, "&>", 2);
 	b = read(1, buf, 1000);
