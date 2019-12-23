@@ -12,9 +12,10 @@ void	func(int a)
 	exit(1);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **environ)
 {
-	extern char **environ;
+	//extern char **environ;
+	environ[1] = "HOME=/Users/mphobos/";
 	int i = 0;
 	while (environ[i] != NULL)
 	{
@@ -26,17 +27,17 @@ int	main(void)
 	int b;
 	int a = 0;
 	int status;
-	char *av[]= {"ls", "-lR", "/", 0};
+	char *ap[]= {"ls", "-l", "/", 0};
 	pid_t p;
 	p = fork();
 	printf("fork returned %d\n", p);
  	if (p == 0)
 	{
-		printf("In child process,  pid=%d,  ppid=%d\n", 
+		printf("In child process,  pid=%d,  ppid=%d\n",
                         getpid(),  getppid());
 		while (++a < 110)
 			printf("%d\n", a);
-		execve("/bin/ls", av, environ);
+		execve("/bin/ls", ap, environ);
 	}
 	else
 	{
@@ -50,13 +51,13 @@ int	main(void)
 			printf("%d\n", a);
 			buf[a] = 0;
 		}
-		sleep(5);
+		//sleep(5);
    	}
 	printf("status = %d\n", status);
 	write (1, "&>", 2);
-	b = read(1, buf, 1000);
-	buf[b] = 0;
-	printf("%s\n", buf);
+	//b = read(1, buf, 1000);
+	//buf[b] = 0;
+	//printf("%s\n", buf);
 	//sleep(10);
 	return (0);
 }

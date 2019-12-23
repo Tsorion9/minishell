@@ -6,15 +6,15 @@
 #    By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 15:20:15 by mphobos           #+#    #+#              #
-#    Updated: 2019/12/21 18:54:37 by mphobos          ###   ########.fr        #
+#    Updated: 2019/12/23 17:39:12 by mphobos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRC = test.c
+SRC = main.c execute_cd.c
 CC = gcc
 INCLUDE = includes
-CFLAGS = -Wall -Wextra -Werror -L libft -lft -I $(INCLUDE) -o $(NAME)
+CFLAGS = -L libft -lft -I $(INCLUDE) -o $(NAME)
 DFLAGS = $(CFLAGS) -g
 
 %.c:

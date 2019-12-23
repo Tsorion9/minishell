@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mphobos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 20:20:18 by mphobos           #+#    #+#             */
-/*   Updated: 2019/09/10 23:04:17 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/23 19:33:02 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ char			**ft_strsplit(const char *s, int c)
 	int		index;
 
 	if (!s)
+		return (NULL);
+	if (s[0] == '\0')
 		return (NULL);
 	if (!(res = ft_mas_strsplit(s, c, 0, 0)))
 		return (0);
