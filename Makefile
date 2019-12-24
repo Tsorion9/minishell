@@ -6,12 +6,12 @@
 #    By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 15:20:15 by mphobos           #+#    #+#              #
-#    Updated: 2019/12/23 17:39:12 by mphobos          ###   ########.fr        #
+#    Updated: 2019/12/24 20:08:02 by mphobos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRC = main.c execute_cd.c
+SRC = main.c execute_cd.c environ.c execute_echo.c
 CC = gcc
 INCLUDE = includes
 CFLAGS = -Wall -Wextra -Werror -L libft -lft -I $(INCLUDE) -o $(NAME)

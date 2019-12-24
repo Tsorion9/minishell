@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   environ.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/24 19:13:33 by mphobos           #+#    #+#             */
+/*   Updated: 2019/12/24 19:53:04 by mphobos          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // вернуть значение переменной окружения
@@ -18,35 +30,39 @@ char		*give_val_env(char **env, char *var)
 		}
 		i++;
 	}
-	ft_putstr("no environment variable named ");
-	ft_putstr(var);
-	write (1, "\n", 1);
 	return (NULL);
 }
 
-// Заменить '$' и '~' на соответствующие значения
+// Заменить '$' и '~' на соответствующие значения из окружения
 void		init_call(char **call, char **env)
 {
 	char	*temp;
 	char	*temp1;
 	int		i;
+	int		len;
 
 	i = 0;
+	len = 0;
 	while (call[i] != NULL)
 	{
-		if (call[i][0] == '$')
+		if (call[i][0] == '$' && ft_strchr(call[i], '/'))
+		{
+			while (call[i][len] != '/')
+				len++;
+			temp1 = ft_strdup(&(call[i][len]));
+			call[i][len] = 0;
+			temp = give_val_env(env, &(call[i][1]));
+			free(call[i]);
+			call[i] = ft_strjoin(temp, temp1);
+			free(temp);
+			free(temp1);
+		}
+		else if (call[i][0] == '$' && ft_strchr(call[i], '/') == NULL)
 		{
 			temp = give_val_env(env, &(call[i][1]));
 			free(call[i]);
-			call[i] = temp;
-		}
-		else if (call[i][0] == '~' && (call[i][1] == 0 \
-			|| call[i][1] == '/'))
-		{
-			temp = ft_strdup(&(call[i][1]));
-			temp1 = give_val_env(env, "HOME");
-			free(call[i]);
-			call[i] = ft_strjoin(temp1, temp);
+			call[i] = ft_strdup(temp);
+			free(temp);
 		}
 		i++;
 	}
