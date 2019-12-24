@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -22,8 +23,12 @@
 
 /*				main.c				*/
 void		call_check(char *buf, char **env);
-char		*give_val_env(char **env, char *var);
+void		execute_pwd(void);
 
 /*				execute_cd.c		*/
 void		execute_cd(char **call, char **env);
 void		check_dir(char *path);
+
+/*              environ.c           */
+char		*give_val_env(char **env, char *var);
+void		init_call(char **call, char **env);

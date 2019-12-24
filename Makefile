@@ -14,7 +14,7 @@ NAME = minishell
 SRC = main.c execute_cd.c
 CC = gcc
 INCLUDE = includes
-CFLAGS = -L libft -lft -I $(INCLUDE) -o $(NAME)
+CFLAGS = -Wall -Wextra -Werror -L libft -lft -I $(INCLUDE) -o $(NAME)
 DFLAGS = $(CFLAGS) -g
 
 %.c:

@@ -12,62 +12,40 @@
 
 #include "minishell.h"
 
-// вернуть значение переменной окружения
-char		*give_val_env(char **env, char *var)
+void		execute_pwd(void)
 {
-	int		i;
-	char	*val;
-	int		n;
+	char	dirname[BUFSIZE];
 
-	n = ft_strlen(var);
-	i = 0;
-	while (env[i] != NULL)
-	{
-		if (ft_strncmp(env[i], var, n) == 0)
-		{
-			val = ft_strdup(&(env[i][n + 1]));
-			return (val);
-		}
-		i++;
-	}
-	ft_putstr("no environment variable named ");
-	ft_putstr(var);
-	write (1, "\n", 1);
-	return (NULL);
+	getcwd(dirname, BUFSIZE);
+	ft_putstr(dirname);
+	write(1, "\n", 1);
 }
 
+//  проверка и выполнение вызова
 void		call_check(char *buf, char **env)
 {
 	char	**call;
-	int		i;
 
 	if ((call = ft_strsplit(buf, ' ')) != NULL)
 	{
+		init_call(call, env);
+		if (ft_strcmp(call[0], "pwd") == 0)
+			execute_pwd();
 		if (ft_strcmp(call[0], "cd") == 0)
 			execute_cd(call, env);
 	}
-	if (call != NULL)
-	{
-		i = 0;
-		while (call[i] != NULL)
-		{
-			free(call[i]);
-			i++;
-		}
-		free(call);
-	}
+	ft_freestrsplit(call);
 }
 
 int			main(int ac, char **av, char **env)
 {
 	char	buf[BUFSIZE];
-	char	dirname[BUFSIZE];
 	int		n;
 
+	(void)ac;
+	(void)av;
 	while (21)
 	{
-		getcwd(dirname, BUFSIZE);
-		ft_putstr(dirname);
 		write(1, "$>", 2);
 		n = read(1, buf, BUFSIZE);
 		buf[n - 1] = 0;
