@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 15:23:19 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/25 19:31:09 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/25 20:05:31 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void		call_check(char *buf, char ***env)
 			execute_cd(call, *env);
 		else if (ft_strcmp(call[0], "setenv") == 0)
 			execute_setenv(call, env);
+		else if (ft_strcmp(call[0], "unsetenv") == 0)
+			execute_unsetenv(call, env);
 		else if (ft_strcmp(call[0], "exit") == 0)
 			execute_exit(call, *env);
 		else

@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 18:54:48 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/25 19:45:07 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/25 20:28:55 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,16 @@ void		print_echo_str(char *str);
 void		execute_cd(char **call, char **env);
 void		check_dir(char *path);
 
-/*				execute_setenv		*/
+/*				execute_setenv.c	*/
 void		execute_setenv(char **call, char ***env);
 void		add_rep_env_var(char **call, char ***env);
 void		add_env_var(char **call, char ***env);
 int			replace_env_var(char **call, char **env);
+
+/*				execute_unsetenv.c	*/
+void		execute_unsetenv(char **call, char ***env);
+int			find_var_env(char **call, char **env);
+void		delete_var_env(char **call, char ***env);
 
 /*				environ.c			*/
 char		*give_val_env(char **env, char *var);
