@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 18:54:48 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/24 21:31:52 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/25 19:45:07 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 #define BUFSIZE 4096
 
 /*				main.c				*/
-void		call_check(char *buf, char **env);
+void		call_check(char *buf, char ***env);
 void		execute_pwd(char **call);
-void		execute_exit(char **call);
+void		execute_exit(char **call, char **env);
+int			get_call_length(char **call);
 
 /*				execute_echo.c		*/
 void		execute_echo(char **env, char **call);
@@ -34,6 +35,14 @@ void		print_echo_str(char *str);
 void		execute_cd(char **call, char **env);
 void		check_dir(char *path);
 
-/*              environ.c           */
+/*				execute_setenv		*/
+void		execute_setenv(char **call, char ***env);
+void		add_rep_env_var(char **call, char ***env);
+void		add_env_var(char **call, char ***env);
+int			replace_env_var(char **call, char **env);
+
+/*				environ.c			*/
 char		*give_val_env(char **env, char *var);
 void		init_call(char **call, char **env);
+void		print_env(char **env);
+char		**copy_env(char **environ);

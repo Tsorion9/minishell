@@ -6,11 +6,22 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 15:23:19 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/24 21:34:39 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/25 19:31:09 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// возвращвет количество аргументов в вызове
+int			get_call_length(char **call)
+{
+	int		i;
+
+	i = 0;
+	while (call[i] != NULL)
+		i++;
+	return (i);
+}
 
 // выполнение вызова pwd
 void		execute_pwd(char **call)
@@ -27,7 +38,7 @@ void		execute_pwd(char **call)
 	write(1, "\n", 1);
 }
 
-void		execute_exit(char **call)
+void		execute_exit(char **call, char **env)
 {
 	if (*(call + 1) != NULL)
 		if (*(call + 2) != NULL)
@@ -36,25 +47,28 @@ void		execute_exit(char **call)
 			return ;
 		}
 	ft_freestrsplit(call);
+	ft_freestrsplit(env);
 	exit(0);
 }
 
 //  проверка и выполнение вызова
-void		call_check(char *buf, char **env)
+void		call_check(char *buf, char ***env)
 {
 	char	**call;
 
 	if ((call = ft_strsplit(buf, ' ')) != NULL)
 	{
-		init_call(call, env);
+		init_call(call, *env);
 		if (ft_strcmp(call[0], "pwd") == 0)
 			execute_pwd(call);
 		else if (ft_strcmp(call[0], "echo") == 0)
-			execute_echo(env, call);
+			execute_echo(*env, call);
 		else if (ft_strcmp(call[0], "cd") == 0)
-			execute_cd(call, env);
+			execute_cd(call, *env);
+		else if (ft_strcmp(call[0], "setenv") == 0)
+			execute_setenv(call, env);
 		else if (ft_strcmp(call[0], "exit") == 0)
-			execute_exit(call);
+			execute_exit(call, *env);
 		else
 		{
 			ft_putstr("minishell: command not found: ");
@@ -65,15 +79,16 @@ void		call_check(char *buf, char **env)
 	ft_freestrsplit(call);
 }
 
-int			main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **environ)
 {
 	char	buf[BUFSIZE];
 	int		n;
 	char	**calls;
+	char	**env;
 
 	(void)ac;
 	(void)av;
-	signal(SIGINT, SIG_IGN);
+	env = copy_env(environ);
 	while (21)
 	{
 		write(1, "$>", 2);
@@ -84,7 +99,7 @@ int			main(int ac, char **av, char **env)
 			n = 0;
 			while (calls[n] != NULL)
 			{
-				call_check(calls[n], env);
+				call_check(calls[n], &env);
 				n++;
 			}
 		}

@@ -6,11 +6,39 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 19:13:33 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/24 19:53:04 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/25 17:25:06 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// копировать окружение
+char		**copy_env(char **environ)
+{
+	char	**env;
+	int		i;
+
+	env = (char**)malloc(sizeof(char*) * (get_call_length(environ) + 1));
+	i = 0;
+	while (environ[i] != NULL)
+	{
+		env[i] = ft_strdup(environ[i]);
+		i++;
+	}
+	env[i] = NULL;
+	return (env);
+}
+
+// печать всех переменных окружения
+void		print_env(char **env)
+{
+	while (*env != NULL)
+	{
+		ft_putstr(*env);
+		write(1, "\n", 1);
+		env++;
+	}
+}
 
 // вернуть значение переменной окружения
 char		*give_val_env(char **env, char *var)
