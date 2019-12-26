@@ -46,6 +46,9 @@ void		execute_unsetenv(char **call, char ***env);
 int			find_var_env(char **call, char **env);
 void		delete_var_env(char **call, char ***env);
 
+/*              execute_bin.c       */
+void        execute_bin(char **call, char **env);
+
 /*				environ.c			*/
 char		*give_val_env(char **env, char *var);
 void		init_call(char **call, char **env);

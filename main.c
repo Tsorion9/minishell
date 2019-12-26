@@ -72,11 +72,7 @@ void		call_check(char *buf, char ***env)
 		else if (ft_strcmp(call[0], "exit") == 0)
 			execute_exit(call, *env);
 		else
-		{
-			ft_putstr("minishell: command not found: ");
-			ft_putstr(call[0]);
-			write(1, "\n", 1);
-		}
+			execute_bin(call, *env);
 	}
 	ft_freestrsplit(call);
 }

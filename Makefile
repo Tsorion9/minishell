@@ -12,7 +12,7 @@
 
 NAME = minishell
 SRC = main.c execute_cd.c environ.c execute_echo.c execute_setenv.c \
-	execute_unsetenv.c
+	execute_unsetenv.c execute_bin.c
 CC = gcc
 INCLUDE = includes
 CFLAGS = -Wall -Wextra -Werror -L libft -lft -I $(INCLUDE) -o $(NAME)
