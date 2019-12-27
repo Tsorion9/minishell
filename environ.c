@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 19:13:33 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/27 19:29:54 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/27 20:47:21 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ char		**copy_env(char **environ)
 // печать всех переменных окружения
 void		print_env(char **env)
 {
-	while (*env != NULL)
+	if (env != NULL)
 	{
-		ft_putstr(*env);
-		write(1, "\n", 1);
-		env++;
+		while (*env != NULL)
+		{
+			ft_putstr(*env);
+			write(1, "\n", 1);
+			env++;
+		}
 	}
 }
 
