@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 18:54:48 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/25 20:28:55 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/27 20:09:25 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,13 @@ void		execute_unsetenv(char **call, char ***env);
 int			find_var_env(char **call, char **env);
 void		delete_var_env(char **call, char ***env);
 
+/*				execute_env.c		*/
+void		execute_env(char **call, char ***env);
+void		run_env_without_flags(char **call, char **env);
+char		**create_call_setenv(char *val_env);
+
 /*              execute_bin.c       */
-void        execute_bin(char **call, char **env);
+void        execute_bin(char **call, char **env, char **new_env);
 
 /*				environ.c			*/
 char		*give_val_env(char **env, char *var);

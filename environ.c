@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 19:13:33 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/25 17:25:06 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/27 19:29:54 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ char		**copy_env(char **environ)
 
 	env = (char**)malloc(sizeof(char*) * (get_call_length(environ) + 1));
 	i = 0;
-	while (environ[i] != NULL)
-	{
-		env[i] = ft_strdup(environ[i]);
-		i++;
-	}
+	if (environ != NULL)
+		while (environ[i] != NULL)
+		{
+			env[i] = ft_strdup(environ[i]);
+			i++;
+		}
 	env[i] = NULL;
 	return (env);
 }
