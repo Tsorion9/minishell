@@ -6,11 +6,20 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 19:13:33 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/27 20:47:21 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 17:41:28 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char		**get_new_env(void)
+{
+	char	**env;
+
+	env = (char**)malloc(sizeof(char*));
+	*env = NULL;
+	return (env);
+}
 
 // копировать окружение
 char		**copy_env(char **environ)

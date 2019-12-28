@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 18:54:48 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/27 20:36:13 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 17:41:48 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,4 @@ char		*give_val_env(char **env, char *var);
 void		init_call(char **call, char **env);
 void		print_env(char **env);
 char		**copy_env(char **environ);
+char		**get_new_env(void);
