@@ -6,13 +6,16 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 20:05:25 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/27 21:17:21 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 21:11:43 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// проверка на нахождение переменной окружения
+/*
+** Проверка на нахождение переменной окружения
+*/
+
 int			find_var_env(char **call, char **env)
 {
 	int		len;
@@ -29,7 +32,10 @@ int			find_var_env(char **call, char **env)
 	return (0);
 }
 
-// удалить переменную окружения
+/*
+** Удалить переменную окружения
+*/
+
 void		delete_var_env(char **call, char ***envi)
 {
 	char	**c_env;
@@ -57,7 +63,10 @@ void		delete_var_env(char **call, char ***envi)
 	*envi = h_env;
 }
 
-// проверить и выполнить unsetenv
+/*
+** Проверить и выполнить команду unsetenv
+*/
+
 void		execute_unsetenv(char **call, char ***env)
 {
 	if (get_call_length(call) > 2)

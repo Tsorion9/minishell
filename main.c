@@ -6,13 +6,16 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 15:23:19 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/27 22:13:10 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 21:08:46 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// возвращвет количество аргументов в вызове
+/*
+** Возвращвет количество аргументов в вызове
+*/
+
 int			get_call_length(char **call)
 {
 	int		i;
@@ -23,6 +26,10 @@ int			get_call_length(char **call)
 			i++;
 	return (i);
 }
+
+/*
+** Выполнить команду exit
+*/
 
 void		execute_exit(char **call, char **env)
 {
@@ -37,7 +44,10 @@ void		execute_exit(char **call, char **env)
 	exit(0);
 }
 
-//  проверка и выполнение вызова
+/*
+** Проверка и выполнение вызова
+*/
+
 void		call_check(char *buf, char ***env)
 {
 	char	**call;

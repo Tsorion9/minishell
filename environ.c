@@ -6,11 +6,15 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 19:13:33 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/28 17:41:28 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 21:26:38 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Вернуть пустое окружение
+*/
 
 char		**get_new_env(void)
 {
@@ -21,7 +25,10 @@ char		**get_new_env(void)
 	return (env);
 }
 
-// копировать окружение
+/*
+** Копировать окружение
+*/
+
 char		**copy_env(char **environ)
 {
 	char	**env;
@@ -39,7 +46,10 @@ char		**copy_env(char **environ)
 	return (env);
 }
 
-// печать всех переменных окружения
+/*
+** Печать всех переменных окружения
+*/
+
 void		print_env(char **env)
 {
 	if (env != NULL)
@@ -53,12 +63,15 @@ void		print_env(char **env)
 	}
 }
 
-// вернуть значение переменной окружения
+/*
+** Вернуть значение переменной окружения
+*/
+
 char		*give_val_env(char **env, char *var)
 {
 	int		i;
 	char	*val;
-	int		n;
+	size_t	n;
 
 	n = ft_strlen(var);
 	i = 0;
@@ -66,45 +79,14 @@ char		*give_val_env(char **env, char *var)
 	{
 		if (ft_strncmp(env[i], var, n) == 0)
 		{
-			val = ft_strdup(&(env[i][n + 1]));
-			return (val);
+			if (ft_strlen(env[i]) >= n)
+				if (env[i][n] == '=')
+				{
+					val = ft_strdup(&(env[i][n + 1]));
+					return (val);
+				}
 		}
 		i++;
 	}
 	return (NULL);
-}
-
-// Заменить '$' и '~' на соответствующие значения из окружения
-void		init_call(char **call, char **env)
-{
-	char	*temp;
-	char	*temp1;
-	int		i;
-	int		len;
-
-	i = 0;
-	len = 0;
-	while (call[i] != NULL)
-	{
-		if (call[i][0] == '$' && ft_strchr(call[i], '/'))
-		{
-			while (call[i][len] != '/')
-				len++;
-			temp1 = ft_strdup(&(call[i][len]));
-			call[i][len] = 0;
-			temp = give_val_env(env, &(call[i][1]));
-			free(call[i]);
-			call[i] = ft_strjoin(temp, temp1);
-			free(temp);
-			free(temp1);
-		}
-		else if (call[i][0] == '$' && ft_strchr(call[i], '/') == NULL)
-		{
-			temp = give_val_env(env, &(call[i][1]));
-			free(call[i]);
-			call[i] = ft_strdup(temp);
-			free(temp);
-		}
-		i++;
-	}
 }

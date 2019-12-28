@@ -6,13 +6,16 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 14:04:16 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/28 18:34:36 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 21:14:20 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// заменить переменную окружения
+/*
+** Заменить переменную окружения
+*/
+
 int			replace_env_var(char **call, char **env)
 {
 	char	*temp;
@@ -38,7 +41,10 @@ int			replace_env_var(char **call, char **env)
 	return (0);
 }
 
-// добавить переменную окружения
+/*
+** Добавить переменную окружения
+*/
+
 void		add_env_var(char **call, char ***envi)
 {
 	char	*temp;
@@ -64,17 +70,23 @@ void		add_env_var(char **call, char ***envi)
 	*envi = env;
 }
 
-// добавить или заменить переменуую окружения
+/*
+** Добавить или заменить переменуую окружения
+*/
+
 void		add_rep_env_var(char **call, char ***env)
 {
 	if (call[3] != NULL)
 		if (call[3][0] == '0' && call[3][1] == 0 &&\
 			replace_env_var(call, *env) == 1)
-				return ;
+			return ;
 	add_env_var(call, env);
 }
 
-// проверка и выполнение setenv
+/*
+** Проверка и выполнение команды setenv
+*/
+
 void		execute_setenv(char **call, char ***env)
 {
 	int		call_len;

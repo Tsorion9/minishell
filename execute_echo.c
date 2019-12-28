@@ -6,13 +6,16 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 19:54:13 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/25 18:12:19 by mphobos          ###   ########.fr       */
+/*   Updated: 2019/12/28 21:19:58 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// вывести строку из echo
+/*
+** Вывести строку из echo
+*/
+
 void		print_echo_str(char *str)
 {
 	while (*str != 0)
@@ -23,7 +26,10 @@ void		print_echo_str(char *str)
 	}
 }
 
-// выполнение echo
+/*
+** Выполнение команды echo
+*/
+
 void		execute_echo(char **env, char **call)
 {
 	int		i;

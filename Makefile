@@ -6,13 +6,14 @@
 #    By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/12 15:20:15 by mphobos           #+#    #+#              #
-#    Updated: 2019/12/27 17:29:44 by mphobos          ###   ########.fr        #
+#    Updated: 2019/12/28 21:08:07 by mphobos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 SRC = main.c execute_cd.c environ.c execute_echo.c execute_setenv.c \
-	execute_unsetenv.c execute_bin.c execute_env.c
+	execute_unsetenv.c execute_bin.c execute_env.c execute_env_sup.c \
+	init_call.c
 CC = gcc
 INCLUDE = includes
 CFLAGS = -Wall -Wextra -Werror -L libft -lft -I $(INCLUDE) -o $(NAME)
