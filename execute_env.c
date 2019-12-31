@@ -87,6 +87,8 @@ int			env_flags(char ***new_env, char **call)
 		if (i + 3 == z)
 			return (z);
 		i = z;
+		if (call[i] == NULL)
+			return (i);
 		i++;
 	}
 	if (call[i] == NULL)
