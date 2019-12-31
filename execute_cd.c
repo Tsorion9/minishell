@@ -22,13 +22,17 @@ void		check_dir_sup(char *path)
 ** Проверка директории с переходом
 */
 
-void		check_dir(char *path)
+void		check_dir(char *path, char *prev_dir)
 {
 	struct stat	fstat;
+	char		prev_prev_dir[BUFSIZE];
 
 	stat(path, &fstat);
-	if (chdir(path) != 0 && path != NULL)
+	ft_memcpy(prev_prev_dir, prev_dir, BUFSIZE);
+	getcwd(prev_dir, BUFSIZE);
+	if (chdir(path) != 0)
 	{
+		ft_memcpy(prev_dir, prev_prev_dir, BUFSIZE);
 		if (access(path, F_OK))
 		{
 			ft_putstr("cd: no such file or directory: ");
@@ -45,8 +49,7 @@ void		check_dir(char *path)
 			check_dir_sup(path);
 		}
 	}
-	if (path != NULL)
-		free(path);
+	free(path);
 }
 
 /*
@@ -55,10 +58,19 @@ void		check_dir(char *path)
 
 void		execute_cd(char **call, char **env)
 {
+	static char	prev_dir[BUFSIZE];
+	char		dir[BUFSIZE];
+
 	if (call[1] != NULL)
 	{
-		if (call[2] == NULL)
-			check_dir(ft_strdup(call[1]));
+		if (call[2] == NULL && ft_strcmp(call[1], "-") != 0)
+			check_dir(ft_strdup(call[1]), prev_dir);
+		else if (call[2] == NULL && ft_strcmp(call[1], "-") == 0)
+		{
+			check_dir(ft_strdup(prev_dir), prev_dir);
+			getcwd(dir, BUFSIZE);
+			check_dir_sup(dir);
+		}
 		else if (call[3] == NULL)
 		{
 			ft_putstr("cd: string not in pwd: ");
@@ -69,5 +81,5 @@ void		execute_cd(char **call, char **env)
 			ft_putstr("cd: too many arguments\n");
 	}
 	else
-		check_dir(give_val_env(env, "HOME"));
+		check_dir(give_val_env(env, "HOME"), prev_dir);
 }

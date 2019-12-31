@@ -34,7 +34,7 @@ void		init_call_sup(char **call, char **env, int i);
 void		execute_echo(char **env, char **call);
 void		print_echo_str(char *str);
 void		execute_cd(char **call, char **env);
-void		check_dir(char *path);
+void		check_dir(char *path, char *prev_dir);
 void		check_dir_sup(char *path);
 void		execute_setenv(char **call, char ***env);
 void		add_rep_env_var(char **call, char ***env);
