@@ -63,8 +63,40 @@ void		init_call_sup1(char **call, char **env, int i)
 	}
 }
 
+char		*remove_equal_sig(char *call)
+{
+	int		i;
+	int		n;
+	char	*new_call;
+
+	i = 0;
+	n = 0;
+	while (call[i] != 0)
+	{
+		if (call[i] == 34)
+			n++;
+		i++;
+	}
+	new_call = (char*)malloc(i - n + 1);
+	i = 0;
+	n = 0;
+	while (call[i] != 0)
+	{
+		if (call[i] != 34)
+		{
+			new_call[n] = call[i];
+			n++;
+		}
+		i++;
+	}
+	new_call[n] = 0;
+	free(call);
+	return (new_call);
+}
+
 /*
 ** Заменить '$' и '~' на соответствующие значения из окружения
+** и убрать все знаки '"'
 */
 
 void		init_call(char **call, char **env)
@@ -76,6 +108,7 @@ void		init_call(char **call, char **env)
 	i = 0;
 	while (call[i] != NULL)
 	{
+		call[i] = remove_equal_sig(call[i]);
 		len = 0;
 		init_call_sup(call, env, i);
 		init_call_sup1(call, env, i);

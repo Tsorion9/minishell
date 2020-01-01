@@ -101,7 +101,12 @@ char			**ft_strsplit(const char *s, int c)
 	if (s[0] == '\0')
 		return (NULL);
 	if (!(res = ft_mas_strsplit(s, c, 0, 0)))
-		return (0);
+		return (NULL);
+	if (res[0] == NULL)
+	{
+		free(res);
+		return (NULL);
+	}
 	i = 0;
 	index = 0;
 	return (ft_sup(s, res, c, i));

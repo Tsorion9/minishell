@@ -25,12 +25,14 @@
 # define BUFSIZE 4096
 
 void		call_check(char *buf, char ***env);
+void		replace_tabs(char *buf);
 void		execute_pwd(char **call);
 void		execute_exit(char **call, char **env);
 int			get_call_length(char **call);
-void		init_call(char **call, char **env);
+void        init_call(char **call, char **env);
 void		init_call_sup1(char **call, char **env, int i);
 void		init_call_sup(char **call, char **env, int i);
+char		*remove_equal_sig(char *call);
 void		execute_echo(char **env, char **call);
 void		print_echo_str(char *str);
 void		execute_cd(char **call, char **env);

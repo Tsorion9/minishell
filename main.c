@@ -45,6 +45,20 @@ void		execute_exit(char **call, char **env)
 }
 
 /*
+** Заменить все табуляции на пробелы
+*/
+
+void		replace_tabs(char *buf)
+{
+	while (*buf != 0)
+	{
+		if (*buf == 9)
+			*buf = ' ';
+		buf++;
+	}
+}
+
+/*
 ** Проверка и выполнение вызова
 */
 
@@ -52,6 +66,7 @@ void		call_check(char *buf, char ***env)
 {
 	char	**call;
 
+	replace_tabs(buf);
 	if ((call = ft_strsplit(buf, ' ')) != NULL)
 	{
 		init_call(call, *env);
