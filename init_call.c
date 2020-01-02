@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 21:06:11 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/28 21:09:23 by mphobos          ###   ########.fr       */
+/*   Updated: 2020/01/02 10:07:23 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,27 @@ void		init_call_sup1(char **call, char **env, int i)
 	}
 }
 
+char		*remove_equal_sig_sup(char *new_call, char *call)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (call[i] != 0)
+	{
+		if (call[i] != 34)
+		{
+			new_call[n] = call[i];
+			n++;
+		}
+		i++;
+	}
+	new_call[n] = 0;
+	free(call);
+	return (new_call);
+}
+
 char		*remove_equal_sig(char *call)
 {
 	int		i;
@@ -78,20 +99,7 @@ char		*remove_equal_sig(char *call)
 		i++;
 	}
 	new_call = (char*)malloc(i - n + 1);
-	i = 0;
-	n = 0;
-	while (call[i] != 0)
-	{
-		if (call[i] != 34)
-		{
-			new_call[n] = call[i];
-			n++;
-		}
-		i++;
-	}
-	new_call[n] = 0;
-	free(call);
-	return (new_call);
+	return (remove_equal_sig_sup(new_call, call));
 }
 
 /*

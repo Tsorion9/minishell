@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 18:54:48 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/29 14:50:38 by mphobos          ###   ########.fr       */
+/*   Updated: 2020/01/02 10:10:53 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ void		replace_tabs(char *buf);
 void		execute_pwd(char **call);
 void		execute_exit(char **call, char **env);
 int			get_call_length(char **call);
-void        init_call(char **call, char **env);
+void		init_call(char **call, char **env);
 void		init_call_sup1(char **call, char **env, int i);
 void		init_call_sup(char **call, char **env, int i);
 char		*remove_equal_sig(char *call);
+char		*remove_equal_sig_sup(char *new_call, char *call);
 void		execute_echo(char **env, char **call);
 void		print_echo_str(char *str);
 void		execute_cd(char **call, char **env);
 void		check_dir(char *path, char *prev_dir);
 void		check_dir_sup(char *path);
+void		check_dir_sup1(char *path);
 void		execute_setenv(char **call, char ***env);
 void		add_rep_env_var(char **call, char ***env);
 void		add_env_var(char **call, char ***env);

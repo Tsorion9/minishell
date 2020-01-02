@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:06:55 by mphobos           #+#    #+#             */
-/*   Updated: 2019/12/28 21:23:15 by mphobos          ###   ########.fr       */
+/*   Updated: 2020/01/02 10:10:44 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void		check_dir_sup(char *path)
 {
 	ft_putstr(path);
 	write(1, "\n", 1);
+}
+
+void		check_dir_sup1(char *path)
+{
+	ft_putstr("cd: no such file or directory: ");
+	check_dir_sup(path);
 }
 
 /*
@@ -34,10 +40,7 @@ void		check_dir(char *path, char *prev_dir)
 	{
 		ft_memcpy(prev_dir, prev_prev_dir, BUFSIZE);
 		if (access(path, F_OK))
-		{
-			ft_putstr("cd: no such file or directory: ");
-			check_dir_sup(path);
-		}
+			check_dir_sup1(path);
 		else if (!(S_ISDIR(fstat.st_mode)))
 		{
 			ft_putstr("cd: not a directory: ");
