@@ -6,7 +6,7 @@
 /*   By: mphobos <mphobos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 18:54:48 by mphobos           #+#    #+#             */
-/*   Updated: 2020/01/02 10:10:53 by mphobos          ###   ########.fr       */
+/*   Updated: 2020/01/04 14:37:25 by mphobos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <stdlib.h>
-# include "libft/includes/libft.h"
+# include "./../libft/includes/libft.h"
 # include <dirent.h>
 
 # define BUFSIZE 4096
